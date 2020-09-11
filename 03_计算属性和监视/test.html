@@ -17,11 +17,11 @@
   计算属性存在缓存, 多次读取只执行一次getter计算
 -->
 <div id="demo">
-  姓: <input type="text" placeholder="First Name" v-model="First Name"><br>
-  名: <input type="text" placeholder="Last Name"><br>
-  姓名1(单向): <input type="text" placeholder="Full Name1"><br>
-  姓名2(单向): <input type="text" placeholder="Full Name2"><br>
-  姓名3(双向): <input type="text" placeholder="Full Name3"><br>
+  姓: <input type="text" placeholder="First Name" v-model="first"><br>
+  名: <input type="text" placeholder="Last Name" v-model="last"><br>
+  姓名1(单向): <input type="text" placeholder="Full Name1" v-model="full1"><br>
+  姓名2(单向): <input type="text" placeholder="Full Name2" v-model="full2"><br>
+  姓名3(双向): <input type="text" placeholder="Full Name3" v-model="full3"><br>
 </div>
 
 
@@ -29,41 +29,63 @@
 
 <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.9/vue.js"></script>
 <script type="text/javascript">
-  let p={
-    a:1,
-    b:2,
-  }
-  console.log(1,p)
-  Object.defineProperty(p,'c',{
-    get(){
-      console.log('get()')
-      return this.a+'-'+this.b
-    },
-    set(value){
-      console.log('set()')
-      let arr=value.split('-')
-      this.a=arr[0]
-      this.b=arr[1]
-    }
-  })
-  console.log(2,p)
-  p.a=3
-  p.b=4
-  console.log(3,p)
-  p.c='a-b'
-  console.log(4,p)
+  // let p={
+  //   a:1,
+  //   b:2,
+  // }
+  // console.log(1,p)
+  // Object.defineProperty(p,'c',{
+  //   get(){
+  //     console.log('get()')
+  //     return this.a+'-'+this.b
+  //   },
+  //   set(value){
+  //     console.log('set()')
+  //     let arr=value.split('-')
+  //     this.a=arr[0]
+  //     this.b=arr[1]
+  //   }
+  // })
+  // console.log(2,p)
+  // p.a=3
+  // p.b=4
+  // console.log(3,p)
+  // p.c='a-b'
+  // console.log(4,p)
 
 
   const vm=new Vue({
     el:"#demo",
     data() {
       return {
-        First Name:'sd'
+        first:'sd',
+        last:"last",
+        full1:"",
+        full2:""
+      }
+    },
+    computed: {
+      full3:{
+        get(){
+          console.log('get()',this)
+          return this.first+'-'+this.last
+        },
+        set(value){
+          this.first=value.split('-')[0]
+          this.last=value.split('-')[1]
+        }
+      }
+    },
+    watch: {
+      first(val){
+        this.full1=val+'-'+this.last
       }
     },
   })
 
-
+  vm.$watch('last',function(val){
+    this.full2=this.first+'-'+val
+  })
 
 
 </script>
