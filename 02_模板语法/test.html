@@ -12,7 +12,7 @@
     双大括号表达式
     指令(以v-开头的自定义标签属性)
 2. 双大括号表达式
-  语法: {{exp}} 或 {{{exp}}}
+  语法: {{exp}} 
   功能: 向页面输出数据
   可以调用对象的方法
 3. 指令一: 强制数据绑定
@@ -31,12 +31,35 @@
 
 <div id="app">
   <h2>1. 双大括号表达式</h2>
-
+  {{msga}}
   <h2>2. 指令一: 强制数据绑定</h2>
-
+  <a v-bind:href="href">baidu</a>
+  <a :href="href">baidu</a>
   <h2>3. 指令二: 绑定事件监听</h2>
-
+  <button v-on:click="dj">你好</button>
+  <button @click="dj">你好2</button>
 </div>
 
 </body>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.9/vue.js"></script>
+<script>
+  new Vue({
+    el:"#app",
+    data() {
+      return {
+        msga:'双大括号表达式',
+        href:'https://www.baidu.com',
+      }
+    },
+    methods:{
+      dj(e){
+        console.log(e,e.target.innerText)
+      }
+    }
+  })
+
+
+</script>
+
+
 </html>
