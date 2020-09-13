@@ -10,9 +10,62 @@
 2. 列表排序
 -->
 
-<script type="text/javascript" src="../js/vue.js"></script>
-<script type="text/javascript">
+<div id="demo">
+  <input type="text" v-model="searchName">
+  <ul>
+    <li v-for="(item, index) in filterList" :key="item.id">
+      {{item.id}}----{{item.name}}----{{item.age}}
+    </li>
+  </ul>
+  <button @click="sortType=2">升序</button>
+  <button @click="sortType=3">降序</button>
+  <button @click="sortType=1">原本顺序</button>
+</div>
 
+
+
+
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.9/vue.js"></script>
+<script type="text/javascript">
+  new Vue({
+    el:"#demo",
+    data() {
+      return {
+        searchName:'',
+        sortType:1,//1 原本顺序 2 升序 3 降序
+        list:[
+          {id:16,name:'tom',age:18},
+          {id:3,name:'tom',age:18},
+          {id:0,name:'tom',age:18},
+          {id:2,name:'cat',age:18},
+          {id:4,name:'dog',age:18},
+        ]
+      }
+    },
+    computed: {
+      filterList(){
+        // 1.取出依赖数据
+        const {searchName,list,sortType}=this
+        
+        // 2.计算
+        let newList=list.filter((item)=>item.name.indexOf(searchName)!==-1)
+        
+        // 排序
+        if(sortType!==1){
+          newList.sort((p1,p2)=>{
+            if(sortType==2){//升序
+              return p1.id-p2.id
+            }else{//降序
+              return p2.id-p1.id
+            }
+          })
+        }
+
+        //返回
+        return newList
+      }
+    },
+  })  
 </script>
 </body>
 </html>

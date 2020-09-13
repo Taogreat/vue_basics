@@ -31,15 +31,39 @@
 -->
 
 <div id="demo">
-  <h2>1. class绑定: :class='xxx'</h2>
+  <h2 class="A" :class="a">class="A" :class="classA"</h2>
+  <h2 :class="['classA','classB','classC']">:class="[classA,classB,classC]"</h2>
+  <h2 :class="{'classA':true,classB:false,classC:bol}">:class="{classA:true,classB:false,classC：bol}"</h2>
 
-  <h2>2. style绑定</h2>
+  
+  <h2 :style="{color:cc,fontSize:'14px'}">:style="{color:cc,fontSize:'14px'}"</h2>
+  <h2 :style="dd">:style="dd"</h2>
+  <h2 :style="[aa,bb]">:style="[aa,bb]"</h2>
 
 </div>
 
-<script type="text/javascript" src="../js/vue.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.9/vue.js"></script>
 <script type="text/javascript">
-
+  new Vue({
+    el:"#demo",
+    data:{
+      a:'classA',
+      b:'classB',
+      c:'classC',
+      bol:false,
+      cc:'red',
+      dd:{
+        color:'red'
+      },
+      aa:{
+        color:'red'
+      },
+      bb:{
+        fontSize:'14px'
+      },
+  
+    }
+  })
 </script>
 </body>
 </html>
