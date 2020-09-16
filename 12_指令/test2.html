@@ -15,7 +15,7 @@
   directives : {
     'my-directive' : {
         bind (el, binding) {
-          el.innerHTML = binding.value.toupperCase()
+          el.innerHTML = binding.value.toUpperCase()
         }
     }
   }
@@ -28,9 +28,41 @@
   2. 功能类型于v-text, 但转换为全小写
 -->
 
-<script type="text/javascript" src="../js/vue.js"></script>
+<div id="app">
+  <p v-to-upper="msg"></p>
+  <p v-tolower="msg"></p>
+</div>
+<div id="app2">
+  <p v-to-upper="msg"></p>
+  <p v-tolower="msg"></p>
+</div>
+
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.9/vue.js"></script>
 <script type="text/javascript">
 
+  Vue.directive('to-upper',function(el,binding){
+    console.log(el,binding)
+    el.textContent=binding.value.toUpperCase()
+  })
+  new Vue({
+    data() {
+      return {
+        msg:'aBcD'
+      }
+    },
+    directives:{
+      'tolower'(el,binding){
+        el.textContent=binding.value.toLowerCase()
+      }
+    }
+  }).$mount('#app')
+  new Vue({
+    data() {
+      return {
+        msg:'aBcD'
+      }
+    }
+  }).$mount('#app2')
 </script>
 </body>
 </html>

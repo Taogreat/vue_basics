@@ -5,10 +5,23 @@
   <title>17_插件</title>
 </head>
 <body>
-
-<script type="text/javascript" src="../js/vue.js"></script>
+<div id="app">
+  <p v-my-directive="msg"></p>
+</div>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.9/vue.js"></script>
+<script src="../js/myPlugin.js"></script>
 <script type="text/javascript">
-
+  Vue.use(MyPlugin)
+  let vm=new Vue({
+    el:"#app",
+    data() {
+      return {
+        msg:'aA'
+      }
+    },
+  })
+  Vue.myGlobalMethod()
+  vm.$myMethod()
 </script>
 </body>
 </html>
